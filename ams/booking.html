@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Booking</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    function generatePassengerFields() {
+      const container = document.getElementById("passengerContainer");
+      container.innerHTML = ""; // clear previous fields
+
+      const count = document.getElementById("num_passengers").value;
+
+      for (let i = 1; i <= count; i++) {
+        const group = document.createElement("div");
+        group.classList.add("passenger-card");
+        group.innerHTML = `
+          <h4>Passenger ${i}</h4>
+          <label>Name:</label>
+          <input type="text" name="passenger_name[]" required><br>
+
+          <label>Age:</label>
+          <input type="number" name="age[]" required><br>
+
+          <label>Gender:</label>
+          <select name="gender[]" required>
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select><br>
+
+          <label>Email:</label>
+          <input type="email" name="email[]" required><br>
+
+          <label>Phone:</label>
+          <input type="text" name="phone[]" required><br>
+        `;
+        container.appendChild(group);
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Book Your Flight</h2>
+    <form action="book_flight.php" method="POST">
+      <label>Your Username:</label>
+      <input type="text" name="username" required><br><br>
+
+      <label>Flight Number:</label>
+      <input type="text" name="flight" required><br><br>
+
+      <label>Source:</label>
+      <input type="text" name="source" required><br><br>
+
+      <label>Destination:</label>
+      <input type="text" name="destination" required><br><br>
+
+      <label>Travel Date:</label>
+      <input type="date" name="travel_date" required><br><br>
+
+      <label>Number of Passengers:</label>
+      <select id="num_passengers" name="num_passengers" onchange="generatePassengerFields()" required>
+        <option value="">Select</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select><br><br>
+
+      <div id="passengerContainer"></div>
+
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+
+</body>
+</html>
